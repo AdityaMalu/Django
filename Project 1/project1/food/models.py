@@ -8,4 +8,6 @@ class Item(models.Model):
     
     item_name = models.CharField(max_length=200)
     item_desc = models.CharField(max_length=200)
-    item_proce = models.IntegerField()
+    item_price = models.IntegerField()
+    item_image = models.CharField(max_length=1000,default="https://www.istockphoto.com/photos/pizza")
+
