@@ -1,17 +1,36 @@
 {% extends 'food/base.html' %}
+
 {% block body %}
-
-<div class="container">
-    <div class="row">
-        <div class ="col-md-6">
-            <img height="300px" src="{{item.item_image}}" class="card"/>
+<div class="container mt-5">
+    <div class="row align-items-center">
+        <!-- Image Section -->
+        <div class="col-md-6 mb-4 mb-md-0">
+            <img 
+                src="{{ object.item_image }}" 
+                alt="{{ object.item_name }}" 
+                class="img-fluid rounded shadow-sm" 
+                style="max-height: 300px; object-fit: cover; width: 100%;">
         </div>
-        <div class ="col-md-6">
 
+        <!-- Item Details Section -->
+        <div class="col-md-6">
+            <h1 class="mb-3">{{ object.item_name }}</h1>
+            <h4 class="text-muted mb-3">{{ object.item_desc }}</h4>
+            <h3 class="text-success mb-4">₹{{ object.item_price }}</h3>
+
+            <!-- Action Buttons -->
+            <div class="d-flex gap-3">
+                <a href="{% url 'food:delete_items' object.id %}" class="btn btn-danger">
+                    Delete
+                </a>
+                <a href="{% url 'food:update_items' object.id %}" class="btn btn-primary">
+                    Edit
+                </a>
+                <a href="{% url 'food:index' %}" class="btn btn-secondary">
+                    Back to List
+                </a>
+            </div>
         </div>
+    </div>
 </div>
-<h1>{{item.item_name}}</h1>
-<h2>{{item.item_desc}}</h2>
-<h3>Rs{{item.item_price}}</h3>
-<a href="{% url 'food:delete_items' item.id %}">Delete</a>
 {% endblock %}

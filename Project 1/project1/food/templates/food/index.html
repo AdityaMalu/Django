@@ -1,40 +1,31 @@
 {% extends 'food/base.html' %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Food</title>
-  </head>
-  <body>
-    {% block body %}
-    {% for item in item_list%}
-    <div class="row">
-        <div class="col-md-3 offset-md-2">
-            <img class="card" height="150px" src="{{ item.item_image}}"/>
-        </div>
-        <div class="col-md-4">
-            <h3>{{item.item_name}}</h3>
-            <h5>{{item.item_desc}}</h5>
-            <h6>Rs{{item.item_price}}</h6>
-        </div>
-        <div class="cold-md-2">
-            <a href="{% url 'food:detail' item.id %}" class="btn btn-success">Details</a>
-        </div>
-    </div>
-    {% endfor %}
-    {% endblock %}
 
-{% comment %} 
-        {% for item in item_list%} 
-        <ul>
-        <li>
-            <a href="{% url 'food:detail' item.id %}">{{item.id}} -- {{ item.item_name }}</a>
-        </li>
-        </ul>
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Food Items</h1>
+    <div class="row">
+        {% for item in item_list %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card shadow-sm">
+                <img 
+                    src="{{ item.item_image }}" 
+                    alt="{{ item.item_name }}" 
+                    class="card-img-top img-fluid" 
+                    style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h4 class="card-title">{{ item.item_name }}</h4>
+                    <p class="card-text">{{ item.item_desc }}</p>
+                    <h6 class="text-muted">Price: ₹{{ item.item_price }}</h6>
+                    <h6 class="text-muted">Added by: {{ item.user_name }}</h6>
+                    <a href="{% url 'food:detail' item.id %}" class="btn btn-primary mt-2 w-100">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center text-muted">No items available.</p>
+        </div>
         {% endfor %}
-    {% endblock %} {% endcomment %}
-    
-  </body>
-</html>
+    </div>
+</div>
+{% endblock %}
